@@ -73,6 +73,19 @@
             text-decoration: none
         }
         
+        a:focus {
+            text-decoration: none
+        }
+        
+        .top a {
+            color: rgb(0, 0, 0);
+            font-size: 18px;
+        }
+        
+        .top a:hover {
+            color: rgb(28, 134, 255);
+        }
+        
         .container1 {
             width: 100%;
             height: 93%;
@@ -131,29 +144,39 @@
             color: rgb(28, 134, 255);
         }
         
-        .collapse {
-            height: 100px;
-            width: 600px;
-            text-align: center;
-            background-color: rgb(28, 134, 255);
-            padding-top: 12px;
-            color: #fff;
-            font-family: "sybold";
-            font-size: 20px;
+        .flexbox {
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            right: 0;
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+            margin-top: 150px;
+            background-color: #fff;
+            display: none;
         }
     </style>
 </head>
 
 <body>
+    <div class="bigblack" style="display:none;position:absolute;left:0;top:0;width:100%;height:100%;background-color: rgb(0, 0, 0, .4);"></div>
+    <div class="flexbox" id="loginbox"></div>
     <div class="top" style="height:7%;width:100%;background:#fff;">
         <div class="container" style="width:80%;margin:auto;border:0;height:100%;">
             <div style="float:left;height:100%;">
-                <div style="float:left;height:60%;margin-top:20%;font-size:24px;"><img src="/image/logo.png" style="height:100%;">首页</div>
+                <div style="float:left;height:60%;margin-top:15px;"><img src="/image/logo.png" style="height:100%;margin-right:30px;"><a href="/index">首页</a></div>
 
             </div>
-            <div style="float:right;margin-left:50px;height:100%;">
+            <div style="float:right;margin-right:50px;height:100%;">
+                <div onclick="ajaxload()" style="float:left;height:60%;margin-top:14px;color: rgb(0, 0, 0);font-size: 18px;">
+                    登录 <span style="font-size:20px;font-weight: 900;color:rgb(28, 134, 255);">/</span> 快速注册
+                </div>
+            </div>
+            <div style="float:right;margin-right:50px;height:100%;">
                 <img src="/image/top-background.png" style="height:100%;">
             </div>
+
         </div>
     </div>
     <div class="container1">
@@ -167,9 +190,6 @@
                 <a href="#">
                     <li class="active" data-toggle="collapse" data-target="#demo">运单追踪</li>
                 </a>
-                <div id="demo" class="collapse out">
-                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                </div>
                 <a href="#">
                     <li>我要寄件</li>
                 </a>
@@ -183,6 +203,43 @@
         </div>
     </div>
 
+    <script>
+        function ajaxload() {
+            $('.bigblack').show();
+            $.ajax({
+                url: '/login',
+                cache: true,
+                async: false,
+                success: function(html) {
+                    $("#loginbox").html(html);
+                }
+            });
+            $('#loginbox').fadeIn();
+            var btn2 = document.getElementById('close');
+            var login1 = document.getElementById('loginform');
+            btn2.addEventListener('click', close, false);
+            login1.addEventListener('change', verify, false);
+        }
+
+        function close() {
+            $('.bigblack').hide();
+            $('#loginbox').fadeOut();
+        }
+
+        function verify() {
+            var phonenumber = $("#phonenumber").val();
+            var correctcode = $("#correctcode").val();
+            var p1 = /^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/
+            if (p1.test(phonenumber) == false) {
+                alert('请填写正确电话号码!!');
+                document.getElementById("phonenumber").value = "";
+            } else {
+                alert("succeess");
+                document.getElementById("getcode").disabled = "none";
+
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -26,7 +26,11 @@ def main():
 @app.route("/search")
 def search():
 
-    return "ok"
+    return render_template("search.html")
+@app.route("/login")
+def login():
+
+    return render_template("login.html")
 
 def getaliyun(phonenumber):
     client = AcsClient('LTAIyNuWycN5rsY5', 'vRqO3bw3o93LmvD9m24W12bK2InFHn', 'cn-hangzhou')
