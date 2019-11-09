@@ -13,8 +13,18 @@
     <title>物流</title>
     <style>
         @font-face {
-            font-family: "sy";
-            src: url('/font/SourceHanSansCN-Normal.otf');
+            font-family: "syregular";
+            src: url('/font/SourceHanSansCN-Regular.otf');
+        }
+        
+        @font-face {
+            font-family: "sybold";
+            src: url('/font/SourceHanSansCN-Bold.otf');
+        }
+        
+        @font-face {
+            font-family: "sylight";
+            src: url('/font/SourceHanSansCN-Light.otf');
         }
         
         html,
@@ -25,7 +35,34 @@
         body,
         td,
         th {
-            font-family: "sy";
+            font-family: "syregular";
+        }
+        
+        @media (max-width: 1600px) {
+            h2 {
+                font-size: 50px;
+            }
+            .mynav {
+                width: 80%;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            h2 {
+                font-size: 41px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            h2 {
+                font-size: 33.75px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .mynav {
+                width: 100%;
+            }
         }
         
         a {
@@ -36,9 +73,16 @@
             text-decoration: none
         }
         
+        .container1 {
+            width: 100%;
+            height: 93%;
+            background: url(/image/bbb.jpg) no-repeat;
+            background-size: cover;
+        }
+        
         .headtext {
             width: 50%;
-            height: 100%;
+            height: 60%;
             min-width: 500px;
             text-align: center;
             margin: 0 auto;
@@ -55,58 +99,77 @@
             margin: 0;
         }
         
-        .container1 {
+        .headlist {
             width: 100%;
-            height: 93%;
-            background: url(/image/bbb.jpg) no-repeat;
-            background-size: cover;
+            height: 100px;
+            background-color: rgb(28, 134, 255);
         }
         
         .mynav {
             margin: 0 auto;
             margin-top: 50px;
-            width: 208px;
             padding: 0;
             list-style-type: none;
         }
         
         .mynav li {
-            border: #fff solid 1px;
-            height: 48px;
+            float: left;
+            height: 100px;
+            width: 25%;
+            min-width: 120px;
             text-align: center;
-            padding-top: 11px;
-            margin-top: 10px;
+            padding-top: 34px;
+            background-color: rgb(28, 134, 255);
             color: #fff;
-            font-family: "sy";
-            font-size: 16px;
+            font-family: "syregular";
+            font-size: 20px;
+            background: url("/image/divider.png") no-repeat center right;
         }
         
         .mynav li:hover {
-            border: 0;
-            padding-top: 12px;
+            background-color: #fff;
+            color: rgb(28, 134, 255);
+        }
+        
+        .collapse {
+            height: 100px;
+            width: 600px;
+            text-align: center;
             background-color: rgb(28, 134, 255);
+            padding-top: 12px;
+            color: #fff;
+            font-family: "sybold";
+            font-size: 20px;
         }
     </style>
 </head>
 
 <body>
     <div class="top" style="height:7%;width:100%;background:#fff;">
-        <div class="container" style="width:80%;margin:auto;border:0;">
-            <div style="float:left;">
+        <div class="container" style="width:80%;margin:auto;border:0;height:100%;">
+            <div style="float:left;height:100%;">
+                <div style="float:left;height:60%;margin-top:20%;font-size:24px;"><img src="/image/logo.png" style="height:100%;">首页</div>
+
             </div>
-            <div style="float:right;margin-left:50px;">
-                <img src="/image/top-background.png" style="height:70px;" />
+            <div style="float:right;margin-left:50px;height:100%;">
+                <img src="/image/top-background.png" style="height:100%;">
             </div>
         </div>
     </div>
     <div class="container1">
         <div class="headtext">
-            <h2><strong>欢迎</strong></h2>
-            <h2><strong>使用同嘉物流</strong></h2>
+            <h2 class="word"><strong>同嘉物流</strong></h2>
+            <h2 class="word"><strong>面向同济大学嘉定校区服务</strong></h2>
+
+        </div>
+        <div class="headlist">
             <ul class="mynav">
                 <a href="#">
-                    <li class="active">运单追踪</li>
+                    <li class="active" data-toggle="collapse" data-target="#demo">运单追踪</li>
                 </a>
+                <div id="demo" class="collapse out">
+                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+                </div>
                 <a href="#">
                     <li>我要寄件</li>
                 </a>
@@ -114,7 +177,7 @@
                     <li>服务网点查询</li>
                 </a>
                 <a href="#">
-                    <li>个人中心</li>
+                    <li style="background-image: none;">个人中心</li>
                 </a>
             </ul>
         </div>
