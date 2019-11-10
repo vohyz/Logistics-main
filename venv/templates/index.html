@@ -144,13 +144,32 @@
             color: rgb(28, 134, 255);
         }
         
+        .headlogin {
+            cursor: pointer;
+            float: left;
+            height: 60%;
+            margin-top: 14px;
+            color: rgb(0, 0, 0);
+            font-size: 18px;
+        }
+        
+        .headlogin:hover {
+            color: rgb(28, 134, 255);
+        }
+        
+        .headlogin>span {
+            font-size: 20px;
+            font-weight: 900;
+            color: rgb(28, 134, 255);
+        }
+        
         .flexbox {
             position: fixed;
             z-index: 9999;
             left: 0;
             right: 0;
             width: 500px;
-            height: 500px;
+            height: 400px;
             margin: 0 auto;
             margin-top: 150px;
             background-color: #fff;
@@ -169,8 +188,8 @@
 
             </div>
             <div style="float:right;margin-right:50px;height:100%;">
-                <div onclick="ajaxload()" style="float:left;height:60%;margin-top:14px;color: rgb(0, 0, 0);font-size: 18px;">
-                    登录 <span style="font-size:20px;font-weight: 900;color:rgb(28, 134, 255);">/</span> 快速注册
+                <div class="headlogin" onclick="ajaxload()">
+                    登录 <span>/</span> 快速注册
                 </div>
             </div>
             <div style="float:right;margin-right:50px;height:100%;">
@@ -216,9 +235,11 @@
             });
             $('#loginbox').fadeIn();
             var btn2 = document.getElementById('close');
-            var login1 = document.getElementById('loginform');
+            var login1 = document.getElementById('phonenumber');
+            var submit1 = document.getElementById('correctcode');
             btn2.addEventListener('click', close, false);
             login1.addEventListener('change', verify, false);
+            submit1.addEventListener('change', verify2, false);
         }
 
         function close() {
@@ -228,15 +249,27 @@
 
         function verify() {
             var phonenumber = $("#phonenumber").val();
-            var correctcode = $("#correctcode").val();
             var p1 = /^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/
             if (p1.test(phonenumber) == false) {
                 alert('请填写正确电话号码!!');
                 document.getElementById("phonenumber").value = "";
+                $("#getcode").attr('disabled', true);
             } else {
-                alert("succeess");
-                document.getElementById("getcode").disabled = "none";
 
+                $("#getcode").attr('disabled', false);
+            }
+        }
+
+        function verify2() {
+            var correctcode = $("#correctcode").val();
+            var p1 = /^\d{6}$/
+            if (p1.test(correctcode) == false) {
+                alert('请填写正确验证码!!');
+                document.getElementById("correctcode").value = "";
+                $("#loginsubmit").attr('disabled', true);
+            } else {
+
+                $("#loginsubmit").attr('disabled', false);
             }
         }
     </script>
