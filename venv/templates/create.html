@@ -1,0 +1,88 @@
+{% block title %}
+<title>我要寄件</title>{% endblock title %} {% extends 'base.html' %} {% block content %}
+<div class="maincontent" style="background-color:rgb(240, 240, 240);height:83%;">
+    <div class="content" id="home">
+        <div id="myCarousel" class="carousel slide">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" class="active">寄件信息</li>
+                <li data-target="#myCarousel">收件信息</li>
+            </ol>
+            <div class="createbox">
+                <form class="ordercreate carousel-inner">
+                    <div class="item active" id="slide1">
+
+                        <div class="ordertitle">
+                            <p><span>姓名</span></p>
+                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_name" name="order_name" type="text" placeholder="请填写寄件人姓名" required=true />
+                        </div>
+                        <div class="ordertitle">
+                            <p><span>手机号码</span></p>
+                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_phone" name="order_phone" type="text" placeholder="请填写手机号码" required=true />
+                        </div>
+                        <div class="ordertitle">
+                            <p><span>所在地</span></p>
+                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_city" name="order_city" type="text" placeholder="请输入寄件地" required=true />
+                        </div>
+                        <div class="ordertitle">
+                            <p><span>详细地址</span></p>
+                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_place" name="order_place" type="text" placeholder="请填写详细地址" required=true />
+                        </div>
+
+
+                    </div>
+                    <div class="item" id="slide2">
+                        <div class="ordertitle">
+                            <p><span>姓名</span></p>
+                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_name" name="order_name" type="text" placeholder="请填写收件人姓名" required=true />
+                        </div>
+                        <div class="ordertitle">
+                            <p><span>手机号码</span></p>
+                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_phone" name="order_phone" type="text" placeholder="请填写手机号码" required=true />
+                        </div>
+                        <div class="ordertitle">
+                            <p><span>所在地</span></p>
+                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_city" name="order_city" type="text" placeholder="请输入收件城市" required=true />
+                        </div>
+                        <div class="ordertitle">
+                            <p><span>详细地址</span></p>
+                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_place" name="order_place" type="text" placeholder="请填写详细地址" required=true />
+                        </div>
+                    </div>
+                    <a class="left button1" style="display: none;float:left;text-align:center;" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <button class="button1" id="ordercreate" type="submit" value="提交" style="display:none;">提交订单</button>
+                    <a id="lasst" class="right button1" style="display: block;float:left;text-align:center;font-size:18px;padding:12px;display:none;" href="#myCarousel" role="button" data-slide="next">
+                        上一步
+                        <span class="sr-only">Next</span>
+                    </a>
+                    <a id="nexxt" class="right button1" style="display: block;float:right;text-align:center;font-size:18px;padding:12px;" href="#myCarousel" role="button" data-slide="next">
+                        下一步
+                        <span class="sr-only">Next</span>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#myCarousel").carousel('pause');
+    var btn2 = document.getElementById('nexxt');
+    btn2.addEventListener('click', changenext, false);
+    var btn2 = document.getElementById('lasst');
+    btn2.addEventListener('click', changelast, false);
+
+    function changenext() {
+        $("#nexxt").css("display", "none");
+        $("#ordercreate").show();
+        $("#lasst").show();
+    }
+
+    function changelast() {
+        $("#nexxt").show();
+        $("#ordercreate").hide();
+        $("#lasst").hide();
+    }
+</script>
+{% endblock content %}

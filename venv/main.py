@@ -25,12 +25,20 @@ def main():
 
 @app.route("/search")
 def search():
-
     return render_template("search.html")
+
+@app.route("/city")
+def city():
+    return render_template("city.html")
+
+@app.route("/create")
+def create():
+    return render_template("create.html")
+
 @app.route("/login")
 def login():
-
     return render_template("login.html")
+
 
 def getaliyun(phonenumber):
     client = AcsClient('LTAIyNuWycN5rsY5', 'vRqO3bw3o93LmvD9m24W12bK2InFHn', 'cn-hangzhou')

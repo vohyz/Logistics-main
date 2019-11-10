@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen" /> {% block title %} {% endblock title %}
+    <style>
+        .headnav {
+            width: 50%;
+            height: 100%;
+            min-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .headnav>li {
+            float: left;
+            width: 33%;
+            height: 100%;
+            list-style-type: none;
+            text-align: center;
+        }
+        
+        .headnav>li>a {
+            display: block;
+            width: 90%;
+            height: 100%;
+            padding: 25px;
+            color: #fff;
+            opacity: .4;
+        }
+        
+        .headnav>li>a:hover {
+            background-color: rgb(28, 134, 255);
+            opacity: 1;
+            border-bottom: rgb(28, 134, 255) 1px solid;
+        }
+        
+        .headnav>li>a:focus {
+            background-color: rgb(28, 134, 255);
+            opacity: 1;
+            border-bottom: rgb(28, 134, 255) 1px solid;
+        }
+        
+        .content {
+            height: 100%;
+            width: 60%;
+            min-width: 500px;
+            padding: 30px;
+            padding-left: 70px;
+            padding-right: 70px;
+            background: #fff;
+            margin: 0 auto;
+        }
+        
+        .ordersearch {
+            margin: 20px auto;
+        }
+        
+        .textbox {
+            height: 50px;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            border: 0;
+            background-color: rgb(244, 244, 244);
+            outline: none;
+        }
+        
+        .textbox1 {
+            height: 30px;
+            border: 0;
+            border-bottom: rgb(230, 230, 230) 1px solid;
+            outline: none;
+            float: none;
+            padding-left: 0;
+        }
+        
+        .textbox1:focus {
+            height: 31px;
+            border-bottom: rgb(28, 134, 255) 2px solid;
+        }
+        
+        .button1 {
+            height: 50px;
+            width: 25%;
+            border: 0;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            background-color: rgb(28, 134, 255);
+            color: #fff;
+            outline: none;
+            float: none;
+        }
+        
+        .button1:hover {
+            background-color: rgba(28, 134, 255, 0.726);
+        }
+        
+        .button1:disabled {
+            cursor: not-allowed;
+            background-color: rgb(170, 170, 170);
+            color: black;
+            box-shadow: unset;
+        }
+        
+        .ordertitle {
+            height: 70px;
+            width: 100%;
+        }
+        
+        .ordertitle>p {
+            opacity: .7;
+            font-size: 12px;
+        }
+        
+        .createbox {
+            margin-top: 40px;
+            position: unset;
+        }
+        
+        .carousel-indicators {
+            position: unset;
+            width: 100%;
+            height: 8px;
+            margin: 0 auto;
+        }
+        
+        .carousel-indicators>li {
+            float: left;
+            font-size: 20px;
+            width: 39%;
+            height: 8px;
+            color: rgb(194, 194, 194);
+            background-color: rgb(173, 173, 173);
+            border: 0;
+            text-indent: 0px;
+            border-radius: 0;
+            margin: 0;
+            margin-left: 1px;
+            margin-right: 1px;
+            line-height: 40px;
+        }
+        
+        .carousel-indicators>li.active {
+            margin: 0;
+            height: 8px;
+            width: 59%;
+            color: rgba(28, 134, 255);
+            background-color: rgba(28, 134, 255);
+            margin-left: 1px;
+            margin-right: 1px;
+        }
+        
+        #ordercreate {
+            display: block;
+            float: right;
+            text-align: center;
+            font-size: 18px;
+            padding: 12px;
+        }
+        
+        .ordercreate>a:focus {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bigblack" style="display:none;position:absolute;left:0;top:0;width:100%;height:100%;background-color: rgb(0, 0, 0, .4);z-index:999;"></div>
+    <div class="flexbox" id="loginbox"></div>
+    <div class="top" style="height:7%;width:100%;background:#fff;">
+        <div class="container" style="width:80%;margin:auto;border:0;height:100%;min-width:500px;">
+            <div style="float:left;height:100%;">
+                <div style="float:left;height:60%;margin-top:15px;"><img src="/image/logo.png" style="height:100%;margin-right:30px;"><a href="/index">首页</a></div>
+
+            </div>
+            <div style="float:right;margin-right:50px;height:100%;">
+                <div class="headlogin" onclick="ajaxload()">
+                    登录 <span>/</span> 快速注册
+                </div>
+            </div>
+            <div style="float:right;margin-right:50px;height:100%;">
+                <img src="/image/top-background.png" style="height:100%;">
+            </div>
+
+        </div>
+    </div>
+    {% block navbar %}
+    <div class="headlist" style="background-color:#333;height:10%;">
+        <ul id="navTab" class="headnav">
+            <li class="active">
+                <a href="/create">
+                我要寄件
+            </a>
+            </li>
+            <li><a href="/search">运单追踪</a></li>
+            <li><a href="/city">地点查询</a></li>
+        </ul>
+    </div>
+    {% endblock navbar %} {% block content %} {% endblock content %}
+    <script>
+        function ajaxload() {
+            $('.bigblack').show();
+            $.ajax({
+                url: '/login',
+                cache: true,
+                async: false,
+                success: function(html) {
+                    $("#loginbox").html(html);
+                }
+            });
+            $('#loginbox').fadeIn();
+            var btn2 = document.getElementById('close');
+            var login1 = document.getElementById('phonenumber');
+            var submit1 = document.getElementById('correctcode');
+            btn2.addEventListener('click', close, false);
+            login1.addEventListener('change', verify, false);
+            submit1.addEventListener('change', verify2, false);
+        }
+
+        function close() {
+            $('.bigblack').hide();
+            $('#loginbox').fadeOut();
+        }
+
+        function verify() {
+            var phonenumber = $("#phonenumber").val();
+            var p1 = /^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/
+            if (p1.test(phonenumber) == false) {
+                alert('请填写正确电话号码!!');
+                document.getElementById("phonenumber").value = "";
+                $("#getcode").attr('disabled', true);
+            } else {
+
+                $("#getcode").attr('disabled', false);
+            }
+        }
+
+        function verify2() {
+            var correctcode = $("#correctcode").val();
+            var p1 = /^\d{6}$/
+            if (p1.test(correctcode) == false) {
+                alert('请填写正确验证码!!');
+                document.getElementById("correctcode").value = "";
+                $("#loginsubmit").attr('disabled', true);
+            } else {
+
+                $("#loginsubmit").attr('disabled', false);
+            }
+        }
+    </script>
+</body>
+
+</html>

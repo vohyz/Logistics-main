@@ -1,0 +1,277 @@
+@font-face {
+    font-family: "syregular";
+    src: url('/font/SourceHanSansCN-Regular.otf');
+}
+
+@font-face {
+    font-family: "sybold";
+    src: url('/font/SourceHanSansCN-Bold.otf');
+}
+
+@font-face {
+    font-family: "sylight";
+    src: url('/font/SourceHanSansCN-Light.otf');
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body,
+td,
+th {
+    font-family: "syregular";
+}
+
+@media (max-width: 1600px) {
+    h2 {
+        font-size: 50px;
+    }
+    .mynav {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1200px) {
+    h2 {
+        font-size: 41px;
+    }
+}
+
+@media (max-width: 992px) {
+    h2 {
+        font-size: 33.75px;
+    }
+}
+
+@media (max-width: 600px) {
+    .mynav {
+        width: 100%;
+    }
+}
+
+a {
+    text-decoration: none
+}
+
+a:hover {
+    text-decoration: none
+}
+
+a:focus {
+    text-decoration: none
+}
+
+.top a {
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+}
+
+.top a:hover {
+    color: rgb(28, 134, 255);
+}
+
+.container1 {
+    width: 100%;
+    height: 93%;
+    background: url(/image/bbb.jpg) no-repeat;
+    background-size: cover;
+}
+
+.headtext {
+    width: 50%;
+    height: 60%;
+    min-width: 500px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 200px;
+    color: #fff;
+    z-index: 9999;
+}
+
+.headtext>hr {
+    margin: 0;
+}
+
+.headtext>h2 {
+    margin: 0;
+}
+
+.headlist {
+    width: 100%;
+    height: 100px;
+    background-color: rgb(28, 134, 255);
+}
+
+.mynav {
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 0;
+    list-style-type: none;
+}
+
+.mynav li {
+    float: left;
+    height: 100px;
+    width: 25%;
+    min-width: 120px;
+    text-align: center;
+    padding-top: 34px;
+    background-color: rgb(28, 134, 255);
+    color: #fff;
+    font-family: "syregular";
+    font-size: 20px;
+    background: url("/image/divider.png") no-repeat center right;
+}
+
+.mynav li:hover {
+    background-color: #fff;
+    color: rgb(28, 134, 255);
+}
+
+.headlogin {
+    cursor: pointer;
+    float: left;
+    height: 60%;
+    margin-top: 14px;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+}
+
+.headlogin:hover {
+    color: rgb(28, 134, 255);
+}
+
+.headlogin>span {
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(28, 134, 255);
+}
+
+.flexbox {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    right: 0;
+    width: 500px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 150px;
+    background-color: #fff;
+    display: none;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+    height: 40px;
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.textbox {
+    margin-top: 30px;
+    height: 50px;
+}
+
+.button1 {
+    margin-top: 30px;
+    height: 50px;
+    border: 0;
+    border-radius: 2px;
+    background-color: rgb(43, 56, 90);
+    color: #fff;
+}
+
+.button1:hover {
+    background-color: rgb(28, 134, 255);
+    box-shadow: 0px 0px 2px 2px rgb(126, 122, 122);
+}
+
+.button1:disabled {
+    cursor: not-allowed;
+    background-color: rgb(170, 170, 170);
+    color: black;
+    box-shadow: unset;
+}
+
+.button2 {
+    margin-top: 30px;
+    height: 50px;
+    border: 0;
+    border-radius: 10px;
+    background-color: rgb(28, 134, 255);
+    color: #fff;
+}
+
+.button2:disabled {
+    cursor: not-allowed;
+    background-color: rgb(170, 170, 170);
+    color: black;
+}
+
+.logintype {
+    float: left;
+}
+
+.nav-tabs>li {
+    height: 40px;
+}
+
+.nav-tabs>li>a {
+    height: 40px;
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 0;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+    height: 40px;
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+}
+
+.headnav {
+    width: 50%;
+    height: 100%;
+    min-width: 500px;
+    margin: 0 auto;
+}
+
+.headnav>li {
+    float: left;
+    width: 33%;
+    height: 100%;
+    list-style-type: none;
+    text-align: center;
+}
+
+.headnav>li>a {
+    display: block;
+    width: 90%;
+    height: 100%;
+    padding: 25px;
+    color: #fff;
+    opacity: .4;
+}
+
+.headnav>li>a:hover {
+    background-color: rgb(28, 134, 255);
+    opacity: 1;
+    border-bottom: rgb(28, 134, 255) 1px solid;
+}
+
+.headnav>li>a:focus {
+    background-color: rgb(28, 134, 255);
+    opacity: 1;
+    border-bottom: rgb(28, 134, 255) 1px solid;
+}
