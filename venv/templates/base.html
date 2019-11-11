@@ -7,6 +7,8 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="/js/myactive.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen" /> {% block title %} {% endblock title %}
     <style>
         .headnav {
@@ -178,80 +180,35 @@
 
             </div>
             <div style="float:right;margin-right:50px;height:100%;">
-                <div class="headlogin" onclick="ajaxload()">
+                {% if session['userphone'] %}
+                <div class="headuser">
+                    欢迎 {{session['userphone']}} <a href='#'>个人中心<span class="glyphicon glyphicon-chevron-right"></span></a>
+                </div> {% endif %}{% if not session['userphone'] %}
+                <div class="headlogin " onclick="ajaxload() ">
                     登录 <span>/</span> 快速注册
                 </div>
+                {% endif %}
             </div>
-            <div style="float:right;margin-right:50px;height:100%;">
-                <img src="/image/top-background.png" style="height:100%;">
+            <div style="float:right;margin-right:50px;height:100%; ">
+                <img src="/image/top-background.png " style="height:100%; ">
             </div>
 
         </div>
     </div>
     {% block navbar %}
-    <div class="headlist" style="background-color:#333;height:10%;">
-        <ul id="navTab" class="headnav">
-            <li class="active">
-                <a href="/create">
+    <div class="headlist " style="background-color:#333;height:10%; ">
+        <ul id="navTab " class="headnav ">
+            <li class="active ">
+                <a href="/create ">
                 我要寄件
             </a>
             </li>
-            <li><a href="/search">运单追踪</a></li>
-            <li><a href="/city">地点查询</a></li>
+            <li><a href="/search ">运单追踪</a></li>
+            <li><a href="/city ">地点查询</a></li>
         </ul>
     </div>
     {% endblock navbar %} {% block content %} {% endblock content %}
-    <script>
-        function ajaxload() {
-            $('.bigblack').show();
-            $.ajax({
-                url: '/login',
-                cache: true,
-                async: false,
-                success: function(html) {
-                    $("#loginbox").html(html);
-                }
-            });
-            $('#loginbox').fadeIn();
-            var btn2 = document.getElementById('close');
-            var login1 = document.getElementById('phonenumber');
-            var submit1 = document.getElementById('correctcode');
-            btn2.addEventListener('click', close, false);
-            login1.addEventListener('change', verify, false);
-            submit1.addEventListener('change', verify2, false);
-        }
 
-        function close() {
-            $('.bigblack').hide();
-            $('#loginbox').fadeOut();
-        }
-
-        function verify() {
-            var phonenumber = $("#phonenumber").val();
-            var p1 = /^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/
-            if (p1.test(phonenumber) == false) {
-                alert('请填写正确电话号码!!');
-                document.getElementById("phonenumber").value = "";
-                $("#getcode").attr('disabled', true);
-            } else {
-
-                $("#getcode").attr('disabled', false);
-            }
-        }
-
-        function verify2() {
-            var correctcode = $("#correctcode").val();
-            var p1 = /^\d{6}$/
-            if (p1.test(correctcode) == false) {
-                alert('请填写正确验证码!!');
-                document.getElementById("correctcode").value = "";
-                $("#loginsubmit").attr('disabled', true);
-            } else {
-
-                $("#loginsubmit").attr('disabled', false);
-            }
-        }
-    </script>
 </body>
 
 </html>
