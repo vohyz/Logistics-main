@@ -8,44 +8,41 @@
                 <li data-target="#myCarousel">收件信息</li>
             </ol>
             <div class="createbox">
-                <form class="ordercreate carousel-inner" action="/create/order">
+                <form class="ordercreate carousel-inner" action="/create/order" method="POST">
                     <div class="item active" id="slide1">
-
                         <div class="ordertitle">
                             <p><span>姓名</span></p>
-                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_name" name="order_name" type="text" placeholder="请填写寄件人姓名" required=true />
+                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_begin_name" name="order_begin_name" type="text" placeholder="请填写寄件人姓名" required=true />
                         </div>
                         <div class="ordertitle">
-                            <p><span>手机号码</span></p>
-                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_phone" name="order_phone" type="text" placeholder="请填写手机号码" required=true />
+                            <p><span>手机号码（请注意，这里必须填写你的注册手机号）</span></p>
+                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_begin_phone" name="order_begin_phone" type="text" placeholder="请填写手机号码" required=true />
                         </div>
                         <div class="ordertitle">
                             <p><span>所在地</span></p>
-                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_city" name="order_city" type="text" placeholder="请输入寄件地" required=true />
+                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_begin_city" name="order_begin_city" type="text" placeholder="请输入寄件地" required=true />
                         </div>
                         <div class="ordertitle">
                             <p><span>详细地址</span></p>
-                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_place" name="order_place" type="text" placeholder="请填写详细地址" required=true />
+                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_begin_place" name="order_begin_place" type="text" placeholder="请填写详细地址" required=true />
                         </div>
-
-
                     </div>
                     <div class="item" id="slide2">
                         <div class="ordertitle">
                             <p><span>姓名</span></p>
-                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_name" name="order_name" type="text" placeholder="请填写收件人姓名" required=true />
+                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_end_name" name="order_end_name" type="text" placeholder="请填写收件人姓名" required=true />
                         </div>
                         <div class="ordertitle">
                             <p><span>手机号码</span></p>
-                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_phone" name="order_phone" type="text" placeholder="请填写手机号码" required=true />
+                            <input class="textbox1 col-md-5 col-sm-5 col-xs-5" id="order_end_phone" name="order_end_phone" type="text" placeholder="请填写手机号码" required=true />
                         </div>
                         <div class="ordertitle">
                             <p><span>所在地</span></p>
-                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_city" name="order_city" type="text" placeholder="请输入收件城市" required=true />
+                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_end_city" name="order_end_city" type="text" placeholder="请输入收件城市" required=true />
                         </div>
                         <div class="ordertitle">
                             <p><span>详细地址</span></p>
-                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_place" name="order_place" type="text" placeholder="请填写详细地址" required=true />
+                            <input class="textbox1 col-md-10 col-sm-10 col-xs-10" id="order_end_place" name="order_end_place" type="text" placeholder="请填写详细地址" required=true />
                         </div>
                     </div>
                     <a class="left button1" style="display: none;float:left;text-align:center;" href="#myCarousel" role="button" data-slide="prev">
@@ -67,6 +64,9 @@
     </div>
 </div>
 <script>
+    $('#myCarousel').carousel({
+        interval: 1000000 // in milliseconds
+    })
     $("#myCarousel").carousel('pause');
     var btn2 = document.getElementById('nexxt');
     btn2.addEventListener('click', changenext, false);

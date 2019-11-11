@@ -1,0 +1,17 @@
+{% block title %}
+<title>我要寄件</title>{% endblock title %} {% extends 'base.html' %} {% block content %}
+<div class="maincontent" style="background-color:rgb(240, 240, 240);height:83%;">
+    <div class="content" id="home">
+        <div id="myCarousel" class="carousel slide">
+
+            <div class="createbox">
+                <form class="ordercreate" action="/create/order" method="POST" style="text-align: center;color:red">
+                    <p><span>创建失败</span></p>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
