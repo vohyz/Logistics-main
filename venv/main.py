@@ -85,22 +85,29 @@ def order():
     sql = 'SELECT max(`order_id`) from `order`'
     cursor.execute(sql) 
     orders = cursor.fetchone()
-    neworder_id = int(orders[0]) + 1
+    neworder_id = orders[0] + 1
     '''
     此处需要发送给calculate
 
     获得返回信息后
     '''
     try:
-        sql='INSERT into `order` VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+        sql='INSERT into `order` VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
         t = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        args = (pymysql.escape_string(str(neworder_id)),pymysql.escape_string(t),pymysql.escape_string(begin_name),pymysql.escape_string(begin_phone),pymysql.escape_string(end_name),pymysql.escape_string(end_phone),pymysql.escape_string(begin_city),pymysql.escape_string(end_city),pymysql.escape_string('进行中'))
+        args = (pymysql.escape_string(str(neworder_id)),\
+            pymysql.escape_string(t),pymysql.escape_string(begin_name),\
+                pymysql.escape_string(begin_phone),pymysql.escape_string(end_name),\
+                    pymysql.escape_string(end_phone),pymysql.escape_string(begin_city),\
+                        pymysql.escape_string(end_city),pymysql.escape_string('进行中'),\
+                            pymysql.escape_string(t),pymysql.escape_string(begin_city),\
+                                pymysql.escape_string('已出发'))
         cursor.execute(sql,args)
         conn.commit()
         cursor.close()
         conn.close()
         return redirect("/create/success")
     except Exception as e:
+        print(e)
         return redirect("/create/failed")
     
 
