@@ -16,9 +16,15 @@
             <a href="/city">
                 <li>服务网点查询</li>
             </a>
-            <a href="#">
+            {% if session['userphone'] %}
+            <a href="/usercenter">
                 <li style="background-image: none;">个人中心</li>
-            </a>
+            </a> {% endif %}{% if not session['userphone'] %}
+
+            <li style="background-image: none;cursor:pointer;" onclick="ajaxload() ">个人中心</li>
+
+            {% endif %}
+
         </ul>
     </div>
 </div>

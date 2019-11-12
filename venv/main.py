@@ -44,7 +44,8 @@ def searchid():
     if order:
         Data = {
             'order_id':order[0],
-            'begin_time':order[1],
+            'begin_time_1':order[1][:11],
+            'begin_time_2':order[1][11:],
             'begin_name':order[2],
             'begin_phone':order[3],
             'end_name':order[4],
@@ -190,6 +191,36 @@ def sms_code():                                         # 发送验证码
         return jsonify(errno='codestoreerror', errmsg="手机验证码保存失败")
 
     return jsonify(errno='ok', errmsg="发送成功")
+
+@app.route('/usercenter')
+def usercenter():
+    if session['userphone']:
+        userphone = session['userphone']
+    else:
+        return render_template('index.html')
+    conn,cursor = connect_mysql()                       # 连接到mysql
+
+    sql = 'SELECT * from `order` where begin_user_phone = %s'%userphone
+    cursor.execute(sql) 
+    orders = cursor.fetchall()
+    conn.commit()
+    cursor.close()
+    conn.close()
+    Data =[]
+    if orders:
+        Data = [{
+            'order_id':order[0],
+            'begin_time_1':order[1][:11],
+            'begin_time_2':order[1][11:],
+            'begin_name':order[2],
+            'begin_phone':order[3],
+            'end_name':order[4],
+            'end_phone':order[5],
+            'begin_city':order[6],
+            'end_city':order[7],
+            'order_state':order[8]
+            } for order in orders]
+    return render_template('usercenter.html', Data = Data)
 
 def connect_mysql():#链接mysql
     conn = pymysql.connect(host="cdb-518aglpe.bj.tencentcdb.com", port=10101, user="root", password="zyx1999zyx", database="service")

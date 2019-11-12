@@ -31,11 +31,26 @@ th {
     .mynav {
         width: 80%;
     }
+    .ordercity {
+        font-size: 24px;
+    }
+    .orderrigt {
+        font-size: 16px;
+        text-align: center;
+    }
 }
 
 @media (max-width: 1200px) {
     h2 {
         font-size: 41px;
+    }
+    .ordercity {
+        font-size: 22px;
+    }
+    .orderrigt {
+        font-size: 14px;
+        text-align: center;
+        letter-spacing: 4px;
     }
 }
 
@@ -43,12 +58,32 @@ th {
     h2 {
         font-size: 33.75px;
     }
+    .ordercity {
+        font-size: 20px;
+    }
+    .orderrigt {
+        font-size: 12px;
+        text-align: center;
+        letter-spacing: 3px;
+    }
 }
 
 @media (max-width: 600px) {
     .mynav {
         width: 100%;
     }
+    .ordercity {
+        font-size: 18px;
+    }
+    .orderrigt {
+        font-size: 10px;
+        text-align: center;
+        letter-spacing: 2px;
+    }
+}
+
+.-webkit-scrollbar {
+    width: 4px;
 }
 
 a {
@@ -181,6 +216,51 @@ a:focus {
     border-right: 1px solid #ddd;
 }
 
+.carousel-indicators {
+    position: unset;
+    width: 100%;
+    height: 8px;
+    margin: 0 auto;
+}
+
+.carousel-indicators>li {
+    float: left;
+    font-size: 20px;
+    width: 39%;
+    height: 8px;
+    color: rgb(194, 194, 194);
+    background-color: rgb(173, 173, 173);
+    border: 0;
+    text-indent: 0px;
+    border-radius: 0;
+    margin: 0;
+    margin-left: 1px;
+    margin-right: 1px;
+    line-height: 40px;
+}
+
+.carousel-indicators>li.active {
+    margin: 0;
+    height: 8px;
+    width: 59%;
+    color: rgba(28, 134, 255);
+    background-color: rgba(28, 134, 255);
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+#ordercreate {
+    display: block;
+    float: right;
+    text-align: center;
+    font-size: 18px;
+    padding: 12px;
+}
+
+.ordercreate>a:focus {
+    color: #fff;
+}
+
 .textbox {
     height: 50px;
     border-top-left-radius: 3px;
@@ -300,4 +380,27 @@ a:focus {
     background-color: rgb(28, 134, 255);
     opacity: 1;
     border-bottom: rgb(28, 134, 255) 1px solid;
+}
+
+.ordersearch {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 80px;
+}
+
+.orderbox {
+    width: 70%;
+    margin: 10px auto;
+    padding: 20px;
+    height: 30%;
+    background-color: #fff;
+    border: rgb(221, 221, 221) 1px solid;
+    box-shadow: 0px 0px 2px 2px rgb(243, 243, 243);
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.orderbox:hover {
+    box-shadow: 0px 0px 2px 2px rgb(221, 221, 221);
 }

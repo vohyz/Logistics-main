@@ -6,14 +6,30 @@
 {% block content %}
 <div class="maincontent" style="background-color:rgb(240, 240, 240);height:83%;">
     <div class="content" id="home">
-        <form class="ordersearch" action="/search/id" method="POST" onsubmit="verify3()">
+        <form class="ordersearch" action="/search/id" method="POST" onsubmit="return verify3()">
             <input class="textbox col-md-11 col-sm-11 col-xs-11" id="ordertext" name="ordertext" type="text" style="float:left;" placeholder="输入运单号进行查询" required=true />
             <button class="button1 col-md-1 col-sm-1 col-xs-1" id="ordercodesub" type="submit" value="提交" style="float:left;width:8.33333%">提交</button>
         </form>
-        <div class="ordershow">
+        <div class="ordershow" style="width:100%;">
             {% if Data %}
-            <div>
-                {{Data.order_id}} {{Data.begin_time}} {{Data.begin_name}} {{Data.begin_phone}} {{Data.end_name}} {{Data.end_phone}} {{Data.begin_city}} {{Data.end_city}} {{Data.order_state}}
+            <div class="orderbox">
+                <div class="col-md-6 col-sm-6 col-xs-6">订单号：{{Data.order_id}}</div>
+                <div class="col-md-6 col-sm-6 col-xs-6" style="text-align:right">{{Data.begin_time_1}}</div>
+                <hr>
+
+                <div class="ordercity col-md-4 col-sm-4 col-xs-4">{{Data.begin_city}}</div>
+                <div class="col-md-4 col-sm-4 col-xs-4"></div>
+                <div class="ordercity col-md-4 col-sm-4 col-xs-4" style="text-align:right">{{Data.end_city}}</div>
+                <div class="col-md-4 col-sm-4 col-xs-4">{{Data.begin_name}}</div>
+                <div class="orderright col-md-4 col-sm-4 col-xs-4">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="glyphicon glyphicon-chevron-right"></span></div>
+                <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:right">{{Data.end_name}}</div>
+                <div class="col-md-12 col-sm-12 col-xs-12" style="color:rgb(161, 161, 161);text-align:right;">{{Data.order_state}}</div>
+
             </div>
             {% endif %}
         </div>
@@ -21,16 +37,14 @@
 </div>
 <script>
     function verify3() {
-        var correctcode = $('#correctcode').val();
+        var correctcode = $('#ordertext').val();
         var p1 = /^\d{6}$/
         if (p1.test(correctcode) == false) {
             alert('请填写正确订单号!!');
-            document.getElementById('correctcode').value = '';
-            $('#loginsubmit').attr('disabled', true);
-        } else {
-
-            $('#loginsubmit').attr('disabled', false);
+            document.getElementById('ordertext').value = '';
+            return false;
         }
+        return true;
     }
 </script>
 {% endblock content %}

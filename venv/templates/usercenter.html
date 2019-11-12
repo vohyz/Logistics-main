@@ -1,0 +1,58 @@
+{% block title %}
+<title>运单追踪</title>{% endblock title %} {% extends 'base.html' %}
+<style>
+
+</style>
+{% block navbar %}
+<div class="headlist " style="background-color:rgb(240, 240, 240);height:10%; ">
+</div> {% endblock navbar %} {% block content %}
+<div class="maincontent" style="background-color:rgb(240, 240, 240);height:83%;width:100%;">
+    <div class="userdetails" style="background-color: #fff;height:20%;width:60%;margin:0 auto;margin-bottom:1%;min-width: 500px;padding: 30px;">
+
+    </div>
+    <div class="content" id="home" style="height:77%;">
+
+        <div class="ordershow1" style="width:100%;height: 100%;overflow-y: scroll;
+        scrollbar-face-color: #889B9F;
+        scrollbar-shadow-color: #3D5054;
+        scrollbar-highlight-color: #C3D6DA;
+        scrollbar-3dlight-color: #3D5054;
+        scrollbar-darkshadow-color: #85989C;
+        scrollbar-track-color: #95A6AA;">
+            {% if Data %} {% for order in Data %}
+            <div class="orderbox">
+                <div class="col-md-6 col-sm-6 col-xs-6">订单号：{{order.order_id}}</div>
+                <div class="col-md-6 col-sm-6 col-xs-6" style="text-align:right">{{order.begin_time_1}}</div>
+                <hr>
+
+                <div class="ordercity col-md-4 col-sm-4 col-xs-4">{{order.begin_city}}</div>
+                <div class="col-md-4 col-sm-4 col-xs-4"></div>
+                <div class="ordercity col-md-4 col-sm-4 col-xs-4" style="text-align:right">{{order.end_city}}</div>
+                <div class="col-md-4 col-sm-4 col-xs-4">{{order.begin_name}}</div>
+                <div class="orderright col-md-4 col-sm-4 col-xs-4">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="glyphicon glyphicon-chevron-right"></span></div>
+                <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:right">{{order.end_name}}</div>
+                <div class="col-md-12 col-sm-12 col-xs-12" style="color:rgb(161, 161, 161);text-align:right;">{{order.order_state}}</div>
+
+            </div>
+            {% endfor %} {% endif %}
+        </div>
+    </div>
+</div>
+<script>
+    function verify3() {
+        var correctcode = $('#ordertext').val();
+        var p1 = /^\d{6}$/
+        if (p1.test(correctcode) == false) {
+            alert('请填写正确订单号!!');
+            document.getElementById('ordertext').value = '';
+            return false;
+        }
+        return true;
+    }
+</script>
+{% endblock content %}
