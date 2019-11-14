@@ -201,11 +201,14 @@ def sms_code():                                         # 发送验证码
 
 @app.route('/usercenter')
 def usercenter():
-    if session['userphone']:
+    if 'userphone' in session:
         userphone = session['userphone']
     else:
-        return render_template('index.html')
+        return redirect('/')
     conn,cursor = connect_mysql()                       # 连接到mysql
+    sql = 'SELECT * from user where user_phone = %s'%userphone
+    cursor.execute(sql) 
+    user = cursor.fetchone()
 
     sql = 'SELECT * from `order` where begin_user_phone = %s'%userphone
     cursor.execute(sql) 
@@ -215,7 +218,11 @@ def usercenter():
     conn.close()
     Data =[]
     if orders:
-        Data = [{
+        Data = {
+            'user':user[0],
+            'user_phone':userphone,
+            'orders':[
+                {
             'order_id':order[0],
             'begin_time_1':order[1][:11],
             'begin_time_2':order[1][11:],
@@ -225,9 +232,16 @@ def usercenter():
             'end_phone':order[5],
             'begin_city':order[6],
             'end_city':order[7],
-            'order_state':order[8]
-            } for order in orders]
+            'order_state':order[8],
+            } 
+            for order in orders]
+            }
     return render_template('usercenter.html', Data = Data)
+
+@app.route('/logout')
+def logout():
+    session.pop('userphone', None)
+    return redirect('/')
 
 def connect_mysql():#链接mysql
     conn = pymysql.connect(host="cdb-518aglpe.bj.tencentcdb.com", port=10101, user="root", password="zyx1999zyx", database="service")
