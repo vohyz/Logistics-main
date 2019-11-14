@@ -12,8 +12,8 @@
         </form>
         <div class="ordershow" style="width:100%;">
             {% if Data %}
-            <div class="orderbox">
-                <div class="col-md-6 col-sm-6 col-xs-6">订单号：{{Data.order_id}}</div>
+            <div class="orderbox" onclick="window.open('/order/{{Data.order_id}}','_self')">
+                <div class="col-md-6 col-sm-6 col-xs-6" id="order_id">订单号：{{Data.order_id}}</div>
                 <div class="col-md-6 col-sm-6 col-xs-6" style="text-align:right">{{Data.begin_time_1}}</div>
                 <hr>
 

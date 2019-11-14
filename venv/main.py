@@ -26,6 +26,11 @@ def index():
 def main():
     return render_template("index.html")
 
+@app.route("/order/<order_id>")
+def showOrder(order_id):
+    Data = order_id
+    return render_template("order.html", Data = Data)
+
 @app.route("/search")
 def search():
     return render_template("search.html")
@@ -278,5 +283,5 @@ if __name__ == '__main__':
     cursor.close()
     conn.close()
     '''
-    #app.run(debug = True, host= '0.0.0.0')
+    app.run(debug = True, host= '0.0.0.0')
     
