@@ -13,6 +13,10 @@ import datetime
 import pymysql
 import random
 import os
+import requests
+import json, urllib
+from urllib import parse
+from urllib.request import urlopen
 
 app = Flask(__name__, static_url_path = "")
 app.config['SECRET_KEY'] = '123456'
@@ -28,7 +32,49 @@ def main():
 
 @app.route("/order/<order_id>")
 def showOrder(order_id):
-    Data = order_id
+    order = []
+    try:
+        conn,cursor = connect_mysql()                       # 连接到mysql
+        sql = 'SELECT * FROM `order` WHERE `order_id` = %s'
+        args = (order_id)
+        cursor.execute(sql, args)
+        order = cursor.fetchone()
+        conn.commit()
+        cursor.close()
+        conn.close()
+    except:
+        Data = {
+            'error_message': 'error'
+        }
+        return render_template("order.html", Data = Data)
+    # print(order)
+    times = order[9].split()
+    order_time = []
+    i = 0
+    while i < len(times):
+        order_time.append(times[i] +' '+ times[i+1])
+        i += 2
+    order_place = order[10].split()
+    order_details = order[11]
+    print(len(order_time))
+    print(order_time)
+    n = len(order_time)
+    Data = {
+        'order_id': order_id,
+        'begin_time_1': order[1][:11],
+        'begin_time_2': order[1][11:],
+        'begin_name': order[2],
+        'begin_phone': order[3],
+        'end_name': order[4],
+        'end_phone': order[5],
+        'begin_city': order[6],
+        'end_city': order[7],
+        'order_state': order[8],
+        'order_time': order_time,
+        'order_place': order_place[:n],
+        'order_details': order_details,
+        'n': n
+    }
     return render_template("order.html", Data = Data)
 
 @app.route("/search")
@@ -74,6 +120,7 @@ def failed():
 @app.route("/create/success")
 def success():
     return render_template("createsuccess.html")
+
 @app.route("/create/order", methods=['GET', 'POST'])
 def order():
     begin_name = request.form.get('order_begin_name')
@@ -84,38 +131,32 @@ def order():
     end_city = request.form.get('order_end_city')
     '''
     此处可能需要支付
-    '''
-    conn,cursor = connect_mysql()                       # 连接到mysql
-
-    sql = 'SELECT max(`order_id`) from `order`'
-    cursor.execute(sql) 
-    orders = cursor.fetchone()
-    neworder_id = orders[0] + 1
-    '''
-    此处需要发送给calculate
-
-    获得返回信息后
-    '''
+    ''' 
     try:
-        sql='INSERT into `order` VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
-        t = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        args = (pymysql.escape_string(str(neworder_id)),\
-            pymysql.escape_string(t),pymysql.escape_string(begin_name),\
-                pymysql.escape_string(begin_phone),pymysql.escape_string(end_name),\
-                    pymysql.escape_string(end_phone),pymysql.escape_string(begin_city),\
-                        pymysql.escape_string(end_city),pymysql.escape_string('进行中'),\
-                            pymysql.escape_string(t),pymysql.escape_string(begin_city),\
-                                pymysql.escape_string('已出发'))
-        cursor.execute(sql,args)
-        conn.commit()
-        cursor.close()
-        conn.close()
-        return redirect("/create/success")
+        url = "http://127.0.0.1:5001"
+        params = {
+            'order_begin_name': begin_name,
+            'order_begin_phone': begin_phone,
+            'order_begin_city': begin_city,
+            'order_end_name': end_name,
+            'order_end_phone': end_phone,
+            'order_end_city': end_city
+        }
+        params = parse.urlencode(params)
+        
+        f = urlopen("%s?%s" % (url, params))
+        
+        content = f.read()
+        res = json.loads(content)
+        print(res)  
+        if res['rst'] == 'ok':
+            return redirect("/create/success")
+        else:
+            return redirect("/create/failed")
     except Exception as e:
         print(e)
         return redirect("/create/failed")
     
-
 @app.route('/login')
 def login():
     return render_template('login.html')
