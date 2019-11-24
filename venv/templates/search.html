@@ -11,33 +11,38 @@
             <button class="button1 col-md-1 col-sm-1 col-xs-1" id="ordercodesub" type="submit" value="提交" style="float:left;width:8.33333%">提交</button>
         </form>
         <div class="ordershow" style="width:100%;">
-            {% if Data %}
-            <div class="orderbox" onclick="window.open('/order/{{Data.order_id}}','_self')">
-                <div class="col-md-6 col-sm-6 col-xs-6" id="order_id">订单号：{{Data.order_id}}</div>
-                <div class="col-md-6 col-sm-6 col-xs-6" style="text-align:right">{{Data.begin_time_1}}</div>
+            {% if Data %} {% if Data.error_message == '0' %} {% for order in Data.orders %}
+            <div class="orderbox" onclick="window.open('/order/{{order.order_id}}','_self')">
+                <div class="col-md-6 col-sm-6 col-xs-6" id="order_id">订单号：{{order.order_id}}</div>
+                <div class="col-md-6 col-sm-6 col-xs-6" style="text-align:right">{{order.begin_time_1}}</div>
                 <hr>
 
-                <div class="ordercity col-md-6 col-sm-6 col-xs-6">{{Data.begin_city}}</div>
-                <div class="ordercity col-md-6 col-sm-6 col-xs-6" style="text-align:right">{{Data.end_city}}</div>
-                <div class="col-md-4 col-sm-4 col-xs-4">{{Data.begin_name}}</div>
+                <div class="ordercity col-md-6 col-sm-6 col-xs-6">{{order.begin_city}}</div>
+                <div class="ordercity col-md-6 col-sm-6 col-xs-6" style="text-align:right">{{order.end_city}}</div>
+                <div class="col-md-4 col-sm-4 col-xs-4">{{order.begin_name}}</div>
                 <div class="orderright col-md-4 col-sm-4 col-xs-4" style="text-align:center">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     <span class="glyphicon glyphicon-chevron-right"></span></div>
-                <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:right">{{Data.end_name}}</div>
-                <div class="col-md-12 col-sm-12 col-xs-12" style="color:rgb(161, 161, 161);text-align:right;">{{Data.order_state}}</div>
+                <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:right">{{order.end_name}}</div>
+                <div class="col-md-12 col-sm-12 col-xs-12" style="color:rgb(161, 161, 161);text-align:right;">{{order.order_state}}</div>
 
             </div>
-            {% endif %}
+            {% endfor %} {% else %}
+            <div class="orderbox">
+                <div class="col-md-6 col-sm-6 col-xs-6" id="order_id">{{Data.error_message}}</div>
+            </div>
+            {% endif %}{% endif %}
         </div>
     </div>
 </div>
 <script>
     function verify3() {
         var correctcode = $('#ordertext').val();
-        var p1 = /^\d{6}$/
+        correctcode = correctcode + ' ';
+        var p1 = /^(\d{6}\s+)+$/
         if (p1.test(correctcode) == false) {
             alert('请填写正确订单号!!');
             document.getElementById('ordertext').value = '';

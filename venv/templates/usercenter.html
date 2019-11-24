@@ -22,7 +22,7 @@
         scrollbar-3dlight-color: #3D5054;
         scrollbar-darkshadow-color: #85989C;
         scrollbar-track-color: #95A6AA;">
-            {% if Data %} {% for order in Data.orders %}
+            {% if Data %} {% if Data.error_message == '0' %} {% for order in Data.orders %}
             <div class="orderbox" style="width:45%;margin-left:2.5%;float:left;padding:0;" onclick="window.open('/order/{{order.order_id}}','_self')">
                 <div class="col-md-6 col-sm-6 col-xs-6">订单号：{{order.order_id}}</div>
                 <div class="col-md-6 col-sm-6 col-xs-6" style="text-align:right">{{order.begin_time_1}}</div>
@@ -40,7 +40,9 @@
                 <div class="col-md-12 col-sm-12 col-xs-12" style="color:rgb(161, 161, 161);text-align:right;">{{order.order_state}}</div>
 
             </div>
-            {% endfor %} {% endif %}
+            {% endfor %} {% else %}
+            <div class="col-md-6 col-sm-6 col-xs-6">{{Data.error_message}}</div>
+            {% endif %} {% endif %}
         </div>
     </div>
 </div>
